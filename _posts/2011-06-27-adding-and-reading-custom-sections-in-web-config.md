@@ -1,15 +1,157 @@
+---
 title: Adding and reading custom sections in web.config
-link: https://pratapgowda.wordpress.com/2011/06/27/adding-and-reading-custom-sections-in-web-config/
-author: pratapgowda
-description: 
-post_id: 80
-created: 2011/06/27 15:24:00
-created_gmt: 2011/06/27 09:54:00
-comment_status: open
-post_name: adding-and-reading-custom-sections-in-web-config
-status: publish
-post_type: post
+date: 2011/06/27 15:24:00 +530
+layout: single
+categories: 
+   - .Net
+tags:
+   - .net
+   - csharp
+   - web
+   - asp.net
+---
+There are many scenarios where the programmer would need to add “custom data” in the configuration file other than the connection strings.
 
-# Adding and reading custom sections in web.config
+In one particular scenario i needed the application keys and secret keys of the Social media in the config file and read the same through the application,
 
-<p>There are many scenarios where the programmer would need to add “custom data” in the configuration file other than the connection strings. </p>  <p>In one particular scenario i needed the application keys and secret keys of the Social media in the config file and read the same through the application,</p>  <p><a href="http://pratapgowda.files.wordpress.com/2011/06/image.png"><img style="background-image:none;padding-left:0;padding-right:0;display:inline;padding-top:0;border-width:0;" title="image" border="0" alt="image" src="http://pratapgowda.files.wordpress.com/2011/06/image_thumb.png" width="552" height="133" /></a></p>  <p>My config file would contain the custom section as shown above, before i could read the same from the application i would need to create a class to read the same.</p>  <p>   <div style="display:inline;float:none;margin:0;padding:0;" id="scid:9ce6104f-a9aa-4a17-a79f-3a39532ebf7c:a32b5fd3-f9e5-4e33-b9a6-6b5994a496aa" class="wlWriterEditableSmartContent"> <div style="border:#000080 1px solid;color:#000;font-family:'Courier New', Courier, Monospace;font-size:10pt;"> <div style="background:#000080;color:#fff;font-family:Verdana, Tahoma, Arial, sans-serif;font-weight:bold;padding:2px 5px;">Code Snippet for custom config</div> <div style="background:#fff;overflow:auto;"> <ol style="background:#ffffff;margin:0;padding:0 0 0 5px;"> <li><span style="color:#0000ff;">using</span> System;</li> <li style="background:#f3f3f3;"><span style="color:#0000ff;">using</span> System.Collections.Generic;</li> <li><span style="color:#0000ff;">using</span> System.Linq;</li> <li style="background:#f3f3f3;"><span style="color:#0000ff;">using</span> System.Web;</li> <li><span style="color:#0000ff;">using</span> System.Configuration;</li> <li style="background:#f3f3f3;">&nbsp;</li> <li><span style="color:#0000ff;">namespace</span> WebRole1.Account</li> <li style="background:#f3f3f3;">{</li> <li>    <span style="color:#808080;">///</span><span style="color:#008000;"> </span><span style="color:#808080;">&lt;summary&gt;</span></li> <li style="background:#f3f3f3;">    <span style="color:#808080;">///</span><span style="color:#008000;"> </span></li> <li>    <span style="color:#808080;">///</span><span style="color:#008000;"> </span><span style="color:#808080;">&lt;/summary&gt;</span></li> <li style="background:#f3f3f3;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> <span style="color:#2b91af;">SocialMediaConfiguration</span> :<span style="color:#2b91af;">ConfigurationSection</span></li> <li>    {</li> <li style="background:#f3f3f3;">        [<span style="color:#2b91af;">ConfigurationProperty</span>(<span style="color:#a31515;">&quot;SocialMedia&quot;</span>)
+![App config](/assets/images/appconfig.png)
+
+My config file would contain the custom section as shown above, before i could read the same from the application i would need to create a class to read the same.
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Configuration;
+ 
+namespace WebRole1.Account
+{
+    /// <summary>
+    ///
+    /// </summary>
+    public class SocialMediaConfiguration :ConfigurationSection
+    {
+        [ConfigurationProperty("SocialMedia")]
+        public SocialMediaSettingCollection SocialMediaSettings
+        {
+            get { return this["SocialMedia"] as SocialMediaSettingCollection; }
+        }
+ 
+    }
+ 
+    /// <summary>
+    ///
+    /// </summary>
+    public class SocialMediaSetting : ConfigurationElement
+    {
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
+        public string Name
+        {
+            get { return this["name"] as string; }
+        }
+ 
+        /// <summary>
+        /// Gets the API key.
+        /// </summary>
+        /// <value>The API key.</value>
+        [ConfigurationProperty("ApiKey", IsRequired = true)]
+        public string ApiKey
+        {
+            get { return this["ApiKey"] as string; }
+        }
+ 
+        /// <summary>
+        /// Gets the secret key.
+        /// </summary>
+        /// <value>The secret key.</value>
+        [ConfigurationProperty("SecretKey", IsRequired = true)]
+        public string SecretKey
+        {
+            get { return this["SecretKey"] as string; }
+        }
+ 
+        /// <summary>
+        /// Gets the icon URL.
+        /// </summary>
+        /// <value>The icon URL.</value>
+        [ConfigurationProperty("IconUrl", IsRequired = false)]
+        public string IconUrl
+        {
+            get { return this["IconUrl"] as string; }
+        }
+    }
+ 
+    public class SocialMediaSettingCollection : ConfigurationElementCollection
+    {
+        /// <summary>
+        /// Gets or sets the <see cref="SocialCrm.SocialMediaSetting"/> at the specified index.
+        /// </summary>
+        /// <value></value>
+        public SocialMediaSetting this[int index]
+        {
+            get { return this.BaseGet(index) as SocialMediaSetting; }
+            set
+            {
+                if (this.BaseGet(index) != null)
+                { base.BaseRemoveAt(index); }
+                this.BaseAdd(index, value);  
+            }
+        }
+ 
+        /// <summary>
+        /// Gets or sets the <see cref="SocialCrm.SocialMediaSetting"/> at the specified index.
+        /// </summary>
+        /// <value></value>
+        public SocialMediaSetting this[string key]
+        {
+            get { return this.BaseGet(key) as SocialMediaSetting; }
+        }
+        /// <summary>
+        /// When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"/>.
+        /// </summary>
+        /// <returns>
+        /// A new <see cref="T:System.Configuration.ConfigurationElement"/>.
+        /// </returns>
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new SocialMediaSetting();
+        }
+ 
+        /// <summary>
+        /// Gets the element key for a specified configuration element when overridden in a derived class.
+        /// </summary>
+        /// <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"/> to return the key for.</param>
+        /// <returns>
+        /// An <see cref="T:System.Object"/> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement"/>.
+        /// </returns>
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((SocialMediaSetting)element).Name;   
+        }
+    }
+}
+```
+
+The class “SocialMediaConfiguration” would allow you to access the appsettings as below
+
+```csharp
+SocialMediaConfiguration socialConfig = (SocialMediaConfiguration)ConfigurationManager.GetSection("SocialMediaSettings");
+```
+
+Just before we launch our code we need to mention the custom section that we just defined to the web.config file, this can be done using the following tags with the “ConfigSections” tag of the web.config
+
+**Note: This tag as to be the first child tag under the “Configuration” section**
+
+```xml
+<configSections>
+    <section name="SocialMediaSettings" type="WebRole1.Account.SocialMediaConfiguration"/>
+</configSections>
+```
+You can add many more such tags by inheriting from “ConfigurationSection” class.
+
+Happy coding!!!
