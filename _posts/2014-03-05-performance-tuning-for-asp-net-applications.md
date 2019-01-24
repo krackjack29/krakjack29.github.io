@@ -1,0 +1,15 @@
+title: Performance Tuning for ASP.Net applications
+link: https://pratapgowda.wordpress.com/2014/03/05/performance-tuning-for-asp-net-applications/
+author: pratapgowda
+description: 
+post_id: 178
+created: 2014/03/05 15:47:00
+created_gmt: 2014/03/05 10:17:00
+comment_status: open
+post_name: performance-tuning-for-asp-net-applications
+status: publish
+post_type: post
+
+# Performance Tuning for ASP.Net applications
+
+<p>What I have noticed in most of the projects that I have been part of is that the Performance is considered as a least priority feature. Well its definitely not a feature, performance should be built in each feature and measured as early and frequently as possible.</p> <p>I have collated few key points to fine tune any web application’s (targeting .Net and IIS but not limited to) performance. </p> <p>1. <b><i>Use CDN (Content Delivery network)</i></b>: All the 3rd party JavaScript files such as JQuery, Knockout should always use the CDN instead of the web application server. CDN Servers are dedicated to deliver the static content and is always faster than your own host. </p> <p>There is a very high probability that the client (browser) would have already cached the JavaScript as part of other web application since most of them use the same CDN url. You can read more about the benefits about CDN <a href="http://www.paessler.com/blog/2010/05/17/networking-basics/real-world-performance-comparison-of-cdn-content-delivery-network-providers" target="_blank">here</a>.</p> <p>2. <b><i>Use Bundling and Minificatio</i></b><i>n</i>: The custom CSS files and the JavaScript files should be bundled into a single large file (reduces the number of HTTP requests) and also minified (reduces the size of the data transferred over the wire).</p> <p>How to enable bundling and minification in MVC: <a href="http://www.asp.net/mvc/tutorials/mvc-4/bundling-and-minification">http://www.asp.net/mvc/tutorials/mvc-4/bundling-and-minification</a></p> <p>3. <b><i>Use static content caching</i></b>: Always set the static content to be cached (includes JavaScript, CSS, images etc.) on the client side. Most modern day browsers would cache the static content themselves. Use “Never Expires” policy to ensure that most of them needn’t be updated.</p> <p>Note: This could also lead to the client not getting the latest updates when something changes, ensure that you have the version in the file name, when you update the file also change the version number.</p> <div id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:aeb07912-6a96-4ddd-a1ca-6db06e184cc7" class="wlWriterEditableSmartContent" style="float:none;margin:0;display:inline;padding:0;"><pre style="width:525px;height:161px;background-color:White;overflow:auto;"><div><span style="color:#0000FF;">&lt;</span><span style="color:#800000;">configuration</span><span style="color:#0000FF;">&gt;</span><span style="color:#000000;">
