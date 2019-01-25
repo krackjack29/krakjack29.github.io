@@ -1,26 +1,66 @@
+---
 title: Using postman to test Apis which use Azure Active Directory for Authentication
-link: https://pratapgowda.wordpress.com/2016/06/29/using-postman-to-test-apis-which-use-azure-active-directory-for-authentication/
-author: pratapgowda
-description: 
-post_id: 211
-created: 2016/06/29 00:30:00
-created_gmt: 2016/06/28 19:00:00
-comment_status: open
-post_name: using-postman-to-test-apis-which-use-azure-active-directory-for-authentication
-status: publish
-post_type: post
+date: 2016/06/29 00:30:00 +530
+layout: single
+categories: 
+   - Tech
+tags:
+   - tools
+   - api
+   - postman
+   - azure
+   - cloud
+---
 
-# Using postman to test Apis which use Azure Active Directory for Authentication
+Postman is arguably the best tool for developers to test/debug their APIs. If you haven’t heard about it or used it I recommend to go download it [ASAP](http://www.getpostman.com/).
 
-<p>Postman is arguably the best tool for developers to test/debug their APIs. If you haven’t heard about it or used it I recommend to go download it <a href="http://www.getpostman.com/" target="_blank">ASAP</a>. </p> <p>Postman has lot of authentication helpers to authorize your API calls, you can read about all of them <a href="http://www.getpostman.com/docs/helpers" target="_blank">here</a>. Our application was using Azure Active Directory to authorize users, the bearer token was being set by the UI, to test the APIs we were using Postman to set the same. </p> <p>Easier way is to copy the generated token into the authorization header, but its better and cleaner to do it through postman.&nbsp; </p> <p>Prerequisite would be to create an Azure AD application in the Azure portal, which delegates permission to your actual application. If you know how to create a Azure application skip to the next part.</p> <p>1. Navigate to <a title="https://manage.windowsazure.com" href="https://manage.windowsazure.com">https://manage.windowsazure.com</a></p> <p>2. Select the Azure Directory instance where you resource application is created.</p> <p>3. Click Add application, you would see the wizard as below</p> <p><a href="http://pratapgowda.files.wordpress.com/2016/06/image.png"><img title="image" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="image" src="http://pratapgowda.files.wordpress.com/2016/06/image_thumb.png" width="443" height="335"></a></p> <p>4. Select Add an Application my organization is developing.</p> <p>5. In the next screen type in some name e,g, postman and Type as “Web Application AND/OR Web API”, click next</p> <p><a href="http://pratapgowda.files.wordpress.com/2016/06/screen2.png"><img title="screen2" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="screen2" src="http://pratapgowda.files.wordpress.com/2016/06/screen2_thumb.png" width="445" height="320"></a></p> <p>6. “Sign-On URL” and “App ID URL” can be any valid URL</p> <p><a href="http://pratapgowda.files.wordpress.com/2016/06/screen3.png"><img title="screen3" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="screen3" src="http://pratapgowda.files.wordpress.com/2016/06/screen3_thumb.png" width="443" height="317"></a></p> <p>7. Once created, click the application you just created (lets call it “postman-test”) and navigate to Configure tab. </p> <ol> <li>Copy the <strong>Client Id</strong> into a notepad  <li>Create a Key with 1 year validity and copy it to some notepad, will be used later as <strong>Client Secret</strong>&nbsp; <li>At bottom you would find “permissions to other applications” click on “Add Application”, select the actual application you want to authorize, in my case its IotServiceDev <a href="http://pratapgowda.files.wordpress.com/2016/06/image1.png"><img title="image" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="image" src="http://pratapgowda.files.wordpress.com/2016/06/image_thumb1.png" width="538" height="55"></a>  <li>Change the reply Url to “<strong>https://www.getpostman.com/oauth2/callback</strong>” , this is very important.</li></ol> <p>Now to test the APIs of IotServiceDev (or your actual under test) application launch postman app. In the Authorization tab, select OAuth2.0 and click on “Get New Access Token”</p> <p><a href="http://pratapgowda.files.wordpress.com/2016/06/access-token-postman.png"><img title="Access token -Postman" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="Access token -Postman" src="http://pratapgowda.files.wordpress.com/2016/06/access-token-postman_thumb.png" width="558" height="567"></a></p> <p>You would find a form such as the above, fill the form with following details</p> <ul> <li>Token Name – Any name to save the token.  <li>Auth Url – “https://login.microsoftonline.com/{<em><strong>tenant</strong></em>}/oauth2/authorize?resource={<em><strong>testing-appId-uri</strong></em>}”  <li>Access Token Url – “https://login.microsoftonline.com/{<em><strong>tenant</strong></em>}/oauth2/token”  <li>Client ID – <strong>Client Id</strong> from configure tab of “postman-test” app.  <li>Client Secret – <strong>Client secret</strong> copied from configure tab of “postman-test” app.</li></ul> <p>Note: <strong><em>tenant</em></strong>– It can be either the name of the active directory or TenantId of the admin who created the active directory. <strong><em>testing-appId-uri </em></strong>is the App ID Uri of the application you are testing.</p> <p>Click on request token ,it would take you Microsoft azure login page. Once you provide the right credentials, token would be listed with the name you specified in the form. For the APIs you want to test click on the token, and you will get option of either sending via header (as bearer token) or append to URL as query parameter. </p> <p>Happy Coding!</p>
+Postman has lot of authentication helpers to authorize your API calls, you can read about all of them [here](http://www.getpostman.com/docs/helpers). Our application was using Azure Active Directory to authorize users, the bearer token was being set by the UI, to test the APIs we were using Postman to set the same.
 
-## Comments
+Easier way is to copy the generated token into the authorization header, but its better and cleaner to do it through postman. 
 
-**[Derek](#346 "2017-07-18 05:53:05"):** What it he testing-appId-uri is the App ID Uri ? Isn't that the same as the client ID? What happens if you don't provide it?
+Prerequisite would be to create an Azure AD application in the Azure portal, which delegates permission to your actual application. If you know how to create a Azure application skip to the next part.
 
-**[Pratap Bhaskar](#347 "2017-07-18 18:08:55"):** Hi Derek, test-appid-uri is the rest endpoint you have secured using active directory and you want to test using postman. Without that value accesstoken will not be generated and only id_token will be returned by AD
+1. Navigate to https://manage.windowsazure.com
 
-**[Nikita S](#386 "2017-11-10 17:26:41"):** Thank you for the post, this finally lets me tests Azure scripts via Postman.
+2. Select the Azure Directory instance where you resource application is created.
 
-**[workforamci](#574 "2018-11-16 03:41:53"):** One quick note and one question.
+3. Click Add application, you would see the wizard as below
+
+![image](/assets/images/poststep3.png)
+
+4. Select Add an Application my organization is developing.
+
+5. In the next screen type in some name e,g, postman and Type as “Web Application AND/OR Web API”, click next
+
+![screen2](/assets/images/poststep5.png)
+
+6. “Sign-On URL” and “App ID URL” can be any valid URL
+
+![screen2](/assets/images/poststep6.png)
+
+7. Once created, click the application you just created (lets call it “postman-test”) and navigate to Configure tab.
+
+   * Copy the Client Id into a notepad
+   * Create a Key with 1 year validity and copy it to some notepad, will be used later as Client Secret 
+   * At bottom you would find “permissions to other applications” click on “Add Application”, select the actual application you want to authorize, in my case its IotServiceDev 
+![screen2](/assets/images/poststep7.png)
+   * Change the reply Url to “https://www.getpostman.com/oauth2/callback” , this is very important.
+
+Now to test the APIs of IotServiceDev (or your actual under test) application launch postman app. In the Authorization tab, select OAuth2.0 and click on “Get New Access Token”
+
+![screen2](/assets/images/poststep8.png)
+
+You would find a form such as the above, fill the form with following details
+
+* Token Name – Any name to save the token.
+* Auth Url – “https://login.microsoftonline.com/{tenant}/oauth2/authorize?resource={testing-appId-uri}”
+* Access Token Url – “https://login.microsoftonline.com/{tenant}/oauth2/token”
+* Client ID – Client Id from configure tab of “postman-test” app.
+* Client Secret – Client secret copied from configure tab of “postman-test” app.
+
+Note: tenant– It can be either the name of the active directory or TenantId of the admin who created the active directory. testing-appId-uri is the App ID Uri of the application you are testing.
+
+Click on request token ,it would take you Microsoft azure login page. Once you provide the right credentials, token would be listed with the name you specified in the form. For the APIs you want to test click on the token, and you will get option of either sending via header (as bearer token) or append to URL as query parameter.
+
+Happy Coding!
 
