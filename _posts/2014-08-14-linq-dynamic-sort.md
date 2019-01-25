@@ -1,15 +1,72 @@
-title: LINQ
-link: https://pratapgowda.wordpress.com/2014/08/14/linq-dynamic-sort/
-author: pratapgowda
-description: 
-post_id: 184
-created: 2014/08/14 22:19:00
-created_gmt: 2014/08/14 16:49:00
-comment_status: open
-post_name: linq-dynamic-sort
-status: publish
-post_type: post
+---
+title: "LINQ - Generic Sort"
+date: 2014/08/14 22:19:00 +530
+layout: single
+categories: 
+   - .Net
+tags:
+   - linq
+   - csharp
+---
 
-# LINQ
+We faced a scenario where we had a dataset (EF Linq query) which needs to be sorted based on the user selection (user was given the selection option with the table columns display name), we ended up making an extension method which could be used by anyone for dynamically selecting the sorting key.
 
-<p>We faced a scenario where we had a dataset (EF Linq query) which needs to be sorted based on the user selection (user was given the selection option with the table columns display name), we ended up making an extension method which could be used by anyone for dynamically selecting the sorting key. </p> <p>We used Linq expressions and reflection to create parameter and property selector from the column name. Below is the code </p> <div id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:b996776c-34b9-48df-ab6e-eef57c8303ba" style="float:none;margin:0;display:inline;padding:0;"><pre style="overflow:auto;height:306px;width:596px;background-color:white;"><div><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">static</span><span style="color:#000000;"> IQueryable</span><span style="color:#000000;">&lt;</span><span style="color:#000000;">T</span><span style="color:#000000;">&gt;</span><span style="color:#000000;"> Sort</span><span style="color:#000000;">&lt;</span><span style="color:#000000;">T</span><span style="color:#000000;">&gt;</span><span style="color:#000000;">(</span><span style="color:#0000ff;">this</span><span style="color:#000000;"> IQueryable</span><span style="color:#000000;">&lt;</span><span style="color:#000000;">T</span><span style="color:#000000;">&gt;</span><span style="color:#000000;"> source, </span><span style="color:#0000ff;">string</span><span style="color:#000000;"> propertyName, </span><span style="color:#0000ff;">bool</span><span style="color:#000000;"> isDescending)
+We used Linq expressions and reflection to create parameter and property selector from the column name. Below is the code
+
+```csharp
+public static IQueryable<T> Sort<T>(this IQueryable<T> source, string propertyName, bool isDescending)
+{
+    if (source == null)
+        return null;
+
+    var entityType = typeof(T);
+    var property = GetPropertyType(entityType, propertyName);
+
+    if (property == null)
+    {
+        return source;
+    }
+    var sortOrder = isDescending ? "OrderByDescending" : "OrderBy";
+
+    var linqParamExpression = Expression.Parameter(entityType, "param");
+    var propertyExpression = GetPropertyExpression(propertyName, linqParamExpression);
+
+    var delegateType = typeof (Func<,>).MakeGenericType(typeof (T), propertyExpression.Type);
+    var expression = Expression.Lambda(delegateType, propertyExpression, linqParamExpression);
+
+    var orderByExpression = Expression.Call(typeof (Queryable), sortOrder,
+        new [] {source.ElementType, propertyExpression.Type}
+        , source.Expression, expression);
+    return source.Provider.CreateQuery<T>(orderByExpression);
+}
+```
+
+GetPropertyType gets the property of the class whose name is specified and allows to navigate to the child object property as well. e.g “AssignedToUser.FirstName” would select the child object AssignedToUser’s firstname property for the sorting
+
+```csharp
+private static PropertyInfo GetPropertyType(Type entityType, string propertyName)
+{
+    var splitStringOnDot = propertyName.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+
+    switch (splitStringOnDot.Length)
+    {
+        case 2:
+            {
+                var foreignKeyProperty = entityType.GetProperty(splitStringOnDot[0]);
+                if (foreignKeyProperty != null)
+                {
+                    var selectedProperty = foreignKeyProperty.PropertyType.GetProperty(splitStringOnDot[1]);
+                    return selectedProperty;
+                }
+            }
+            break;
+        case 1:
+            return entityType.GetProperty(propertyName);
+        default:
+            break;
+    }
+    return null;
+}
+```
+
+Happy Coding!!!

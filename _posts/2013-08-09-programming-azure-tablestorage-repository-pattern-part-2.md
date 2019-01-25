@@ -1,24 +1,176 @@
-title: Programming Azure TableStorage : Repository Pattern Part -2
-link: https://pratapgowda.wordpress.com/2013/08/09/programming-azure-tablestorage-repository-pattern-part-2/
-author: pratapgowda
-description: 
-post_id: 98
-created: 2013/08/09 05:21:00
-created_gmt: 2013/08/08 23:51:00
-comment_status: open
-post_name: programming-azure-tablestorage-repository-pattern-part-2
-status: publish
-post_type: post
+---
+title: "Programming Azure TableStorage : Repository Pattern Part -2"
+date: 2013/08/09 05:21:00 +530
+layout: single
+categories: 
+   - Design Patterns
+   - Azure
+tags:
+   - azure
+   - cloud
+   - .net
+   - csharp
+   - designpatterns
+---
 
-# Programming Azure TableStorage : Repository Pattern Part -2
+In my previous blog, i mentioned the basics and the usage of the repository pattern with the TableStorage (only CRUD operations without the ‘R’ reading and querying capabilities).  I did that because we can leverage the [Query Object](http://www.martinfowler.com/eaaCatalog/queryObject.html) pattern to do the reading/querying the storage.
 
-<p>In my previous <a href="http://pratapgowda.wordpress.com/2013/08/04/programming-azure-tablestorage-repository-patternpart-1/" target="_blank">blog</a>, i mentioned the basics and the usage of the repository pattern with the TableStorage (only CRUD operations without the ‘R’ reading and querying capabilities).&#160; I did that because we can leverage the <a href="http://www.martinfowler.com/eaaCatalog/queryObject.html" target="_blank">Query Object</a> pattern to do the reading/querying the storage.</p>  <p>Query object pattern – simply put its representing all the queries as objects</p>  <p><strong>Querying the TableStorage – </strong>TableStorage indexes the table data based on PartitionKey and RowKey, but one could still query based on other properties in entity.However querying non key properties would cause <em>full table scan</em>, which will definitely degrade the performance.&#160; So while designing the table one need to extra careful about the usage of partition key and row key.&#160; More info - <a href="http://msdn.microsoft.com/en-us/library/windowsazure/hh508997.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/hh508997.aspx</a>.</p>  <p><strong>ITableReader&lt;T&gt;&#160; - </strong>ITableReader is an interface designed to execute the queries on the table of type T. </p>  <div id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:8083ba83-7343-4336-9a8d-15d5c9933f81" class="wlWriterEditableSmartContent" style="float:none;margin:0;display:inline;padding:0;"><pre style="width:550px;height:465px;background-color:White;overflow:auto;"><div><span style="color:#008080;"> 1</span> <span style="color:#000000;">     </span><span style="color:#0000FF;">public</span><span style="color:#000000;"> </span><span style="color:#0000FF;">interface</span><span style="color:#000000;"> ITableReader</span><span style="color:#000000;">&lt;</span><span style="color:#000000;">TTable</span><span style="color:#000000;">&gt;</span><span style="color:#000000;">
+Query object pattern – simply put its representing all the queries as objects
 
-## Comments
+Querying the TableStorage – TableStorage indexes the table data based on PartitionKey and RowKey, but one could still query based on other properties in entity.However querying non key properties would cause full table scan, which will definitely degrade the performance.  So while designing the table one need to extra careful about the usage of partition key and row key.  [More info](http://msdn.microsoft.com/en-us/library/windowsazure/hh508997.aspx).
 
-**[Guy](#149 "2014-06-24 17:29:42"):** Hi, nice article, but I got some issue, may be you can assist, ICloudTableContext used in TableStore constructor doesn't exist as TYpe, may be obsolete, but didn't find any documentation. Another Issue, you used RepositoryHelper.dind't find any implementation for this static class.
+**ITableReader&lt;T>**  – ITableReader is an interface designed to execute the queries on the table of type T.
 
-**[Pratap Bhaskar](#193 "2014-08-19 15:39:30"):** Repository helper just gives the Table names using the attributes which we have created
+```csharp
+public interface ITableReader<TTable>
+    where TTable : BaseTableEntity,new()
+{
+    IEnumerable<TTable> FindByFilters(TableFilter<TTable> filters)
+}
 
-**[Pratap Bhaskar](#192 "2014-08-19 15:37:36"):** Hi Guy,
+public abstract class TableFilter<TModel>
+    where TModel : BaseTableEntity,new()
+{
+    protected string PartitionKey { get; set; }
 
+    protected string RowKey { get; set; }
+
+    public abstract Expression<Func<TModel, bool>> Predicate { get; }
+
+    protected abstract string GenerateTableQuery();
+
+    protected virtual string GetPartitionKeyFilterString()
+    {
+        if (string.IsNullOrWhiteSpace(this.PartitionKey))
+            return "1=1";
+
+        return TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, this.PartitionKey);
+    }
+
+    protected virtual string GetRowKeyFilterString()
+    {
+        if (string.IsNullOrWhiteSpace(this.RowKey))
+            return "1=1";
+
+        return TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, this.RowKey);
+    }
+
+    public TableQuery<TModel> GenerateQuery()
+    {
+        var query = new TableQuery<TModel>().Where(this.GenerateTableQuery());
+        return query;
+    }
+}
+```
+
+The interface contains one method FindByFilters which takes the abstract class TableFilter which generates the query and the store just executes them and returns back the results.
+
+We could further create 3 more abstract class for the following type of queries 
+1. ReadByPartitionKey 
+2. ReadByPartitionKeyAndRowKey 
+3. ReadByRowKey
+
+```csharp
+public abstract class ReadByPartitionKeyAndRowKey<TModel> : TableFilter<TModel>
+    where TModel : BaseTableEntity, new()
+{
+
+    public ReadByPartitionKeyAndRowKey(string partitionKey, string rowKey)
+    {
+        this.PartitionKey = RepositoryHelper.AppenedTableNameToKey<TModel>(partitionKey);
+        this.RowKey = RepositoryHelper.AppenedTableNameToKey<TModel>(rowKey);
+    }
+
+    public override Expression<Func<TModel, bool>> Predicate
+    {
+        get { return p=> p.PartitionKey == this.PartitionKey && p.RowKey == this.RowKey; }
+    }
+
+    protected override string GenerateTableQuery()
+    {
+        string combinedFilter = TableQuery.CombineFilters(this.GetPartitionKeyFilterString(),
+            TableOperators.And, this.GetRowKeyFilterString());
+
+        return combinedFilter;
+    }
+}
+
+public abstract class ReadByPartitionKey<TModel> : TableFilter<TModel>
+    where TModel : BaseTableEntity, new()
+{
+    public ReadByPartitionKey(string partionKey)
+    {
+        this.PartitionKey = RepositoryHelper.AppenedTableNameToKey<TModel>(partionKey);
+    }
+
+    public override Expression<Func<TModel, bool>> Predicate
+    {
+        get { return p=> p.PartitionKey == this.PartitionKey; }
+    }
+
+    protected override string GenerateTableQuery()
+    {
+        return this.GetPartitionKeyFilterString();
+    }
+}
+
+public abstract class ReadByRowKey<TModel> : TableFilter<TModel>
+    where TModel : BaseTableEntity, new()
+{
+    public ReadByRowKey(string rowKey)
+    {
+        this.RowKey = RepositoryHelper.AppenedTableNameToKey<TModel>(rowKey);
+    }
+
+    public override Expression<Func<TModel, bool>> Predicate
+    {
+        get { return p => p.RowKey == this.RowKey; }
+    }
+
+    protected override string GenerateTableQuery()
+    {
+        return (this.GetRowKeyFilterString());
+    }
+}
+```
+
+few examples of the concrete query classes are
+
+```csharp
+public class ContactReadByPartitionKey : ReadByPartitionKey<Contact>
+{
+    public ContactReadByPartitionKey(string email) : base(email) { }
+}
+
+public class ContactReadByTitle : TableFilter<Feed>
+{
+    string _title;
+    public ContactReadByTitle(string title)
+    {
+        _title = title;
+    }
+
+    protected override string GenerateTableQuery()
+    {
+        return TableQuery.GenerateFilterCondition("Title", QueryComparisons.Equal, this._title);
+    }
+}
+```
+
+In the above example the first class indicates query to read contact whose partitionkey is email, while the second class generates the query to get all the Contacts with title as give value but this query does a full table scan.
+
+You can read about TableQuery.GenerateFilterCondition [here](http://msdn.microsoft.com/en-us/library/microsoft.windowsazure.storage.table.tablequery_members.aspx)
+
+### Implementing ITableReader<T> in TableStore<T>
+
+TableStore is the repository that we created in the previous blog , this store can implement ITableReader’s FindByFilters method and should be fairly simple affair. Use TableFilter’s GenerateQuery method to generate the query string and pass it as parameter to CloudTable.ExecuteQuery method and voila you are done!!!!.
+
+```csharp
+public IEnumerable<TTable> FindByFilters(TableFilter<TTable> filters)
+{
+    var query = filters.GenerateQuery();
+    return this.CloudTable.ExecuteQuery<TTable>(query);
+}
+```
+
+Happy Coding!!!

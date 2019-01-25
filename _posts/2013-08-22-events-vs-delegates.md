@@ -1,15 +1,101 @@
+---
 title: Events Vs Delegates
-link: https://pratapgowda.wordpress.com/2013/08/22/events-vs-delegates/
-author: pratapgowda
-description: 
-post_id: 109
-created: 2013/08/22 23:11:00
-created_gmt: 2013/08/22 17:41:00
-comment_status: open
-post_name: events-vs-delegates
-status: publish
-post_type: post
+date: 2013/08/22 23:11:00 +530
+layout: single
+categories: 
+   - .Net
+tags:
+   - .net
+   - csharp
+---
 
-# Events Vs Delegates
+You probably would have heard each interviewer asking this question to you in each and every interview you would have attended. I have asked it many million times myself and listened to a different answer each time.
 
-<p>You probably would have heard each interviewer asking this question to you in each and every interview you would have attended. I have asked it many million times myself and listened to a different answer each time. </p>  <p>Even i didn’t know the absolute answer, so decided to dig deep into the topic and below are my findings</p>  <p>Delegates and Events are almost the same, both are function pointers which can be used as members in the classes, entities who have the handle to these members can subscribe and unsubscribe using += and –= operators. Both are by default multi cast. </p>  <p>Following is the code piece for using a delegate and event. </p>  <div id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:141acbbc-890c-42db-8dbe-7944157e8a69" class="wlWriterEditableSmartContent" style="float:none;margin:0;display:inline;padding:0;"><pre style="width:616px;height:329px;background-color:White;overflow:auto;"><div><span style="color:#008080;"> 1</span> <span style="color:#0000FF;">namespace</span><span style="color:#000000;"> Events_And_Delegates
+Even i didn’t know the absolute answer, so decided to dig deep into the topic and below are my findings
+
+Delegates and Events are almost the same, both are function pointers which can be used as members in the classes, entities who have the handle to these members can subscribe and unsubscribe using += and –= operators. Both are by default multi cast.
+
+Following is the code piece for using a delegate and event.
+
+```csharp
+namespace Events_And_Delegates
+{
+    public delegate int CalculatorDelegate(int a, int b);
+    public delegate void ErrorOnCalculationDelegate(string exceptionMessage);
+    public class Calculator
+    {
+        public CalculatorDelegate Calculation;
+        public event ErrorOnCalculationDelegate ErrorHappened;
+        public Calculator()
+        {
+            this.Calculation += new CalculatorDelegate(this.Divide);
+        }
+        public int Divide(int a, int b)
+        {
+            if (b == 0 && this.ErrorHappened != null)
+            {
+                this.ErrorHappened("Both are 0's");
+                return 0;
+            }
+            return a / b;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculator add = new Calculator();
+            //Subscribe to the Delegate
+            add.Calculation += new CalculatorDelegate(Program.Subtract);
+            //Subscribe to the event
+            add.ErrorHappened += new ErrorOnCalculationDelegate(Program.ExceptionHandling);
+            //Invoke Delegate to execute all the methods
+            add.Calculation(10,5);
+            //Invoke Event outside the class
+            //add.ErrorOnCalculationDelegate("Test");//Compiler error
+        }
+
+        public static void ExceptionHandling(string exceptionMessage)
+        {
+            System.Console.WriteLine(exceptionMessage);
+        }
+
+        public static int Subtract(int a, int b)
+        {
+            return a - b;
+        }
+    }
+}
+```
+
+In the above sample we have a class containing a delegate called CalculatorDelegate and an event called ErrorOnCalculationDelegate. The method Program.Main function which creates an instance of calculator class and subscribes to the delegate and event from the class.
+
+Now the main difference between Events and Delegates is explained in line number 35, **when you try to invoke an event outside the class using the instance handle the compiler throws up error, but a delegate member can be invoked by any object which can access it**.
+
+### How does .Net compiler do this ?
+
+Answer can be found in managed IL code ( use [ILDASM](http://msdn.microsoft.com/en-us/library/f7dy01k1.aspx) tool to decompile the library or app into IL code) the event adds two special methods in the class namely add_{EventName} and remove_{EventName}
+
+![Event Delegates](/assets/images/eventdelegates.jpg)
+
+The ErrorHappened property is made private (one with blue rhombus)
+
+```csharp
+.field private class Events_And_Delegates.ErrorOnCalculationDelegate ErrorHappened
+```
+and another special type called the ErrorHappened (one with green triangle) which becomes the property used by the consumer of the instance.
+
+```csharp
+.event Events_And_Delegates.ErrorOnCalculationDelegate ErrorHappened
+
+{
+
+  .addon instance void Events_And_Delegates.Calculator
+  ::add_ErrorHappened(class Events_And_Delegates.ErrorOnCalculationDelegate)
+
+  .removeon instance void Events_And_Delegates.Calculator
+  ::remove_ErrorHappened(class Events_And_Delegates.ErrorOnCalculationDelegate)
+
+} // end of event Calculator::ErrorHappened
+```
