@@ -16,13 +16,13 @@ minimal_mistakes_skin    : "air" #"default" "air", "aqua", "contrast", "dark", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Code, As I see it..."
+title                    : &title "Code, As I see it..."
 title_separator          : "-"
-name                     : "Pratap Bhaskar"
+name                     : &name "Pratap Bhaskar"
 description              : "My findings in technical world, to help others solve the problems that I have faced."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://pratap-dotnet.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : pratap-dotnet/pratap-dotnet.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -106,18 +106,12 @@ analytics:
 
 # Site Author
 author:
-  name             : "Pratap Bhaskar"
+  name             : *name
   avatar           : "/assets/images/me.jpg"
-  bio              : "A developer who can also do a bit a solution design and architecture. With more than 13 years in IT have picked up considerable knowledge in programming using .Net, C#, Javascript, NodeJs, Azure, IoT and other spaces."
-  location         : "Bangalore"
-  email            : "pratap.aditi@outlook.com"
+  bio              : "A developer who can also do a bit a solution design and architecture."
+  location         : "Bangalore, India"
+  email            : &email "pratap.aditi@outlook.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: mailto:pratap.aditi@email.com
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://pratapgowda.wordpress.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/pratapbhaskar29"
@@ -130,22 +124,10 @@ footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url:
+      url: "https://twitter.com/pratapbhaskar29"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://github.com/pratap-dotnet"
 
 
 # Reading Files
