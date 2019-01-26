@@ -1,6 +1,7 @@
 ---
 title: "Azure CLI Alias extensions"
 layout: single
+comments: true
 date: 2019/01/22
 categories: 
     - Azure
