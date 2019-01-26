@@ -2,6 +2,7 @@
 title: "Appveyor– Free continuos integration tool for .Net Project"
 date: 2017/04/08 00:00:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

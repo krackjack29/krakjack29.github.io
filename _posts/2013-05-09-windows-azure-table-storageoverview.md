@@ -2,6 +2,7 @@
 title: Windows Azure Table Storage
 date: 2013/05/09 19:32:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

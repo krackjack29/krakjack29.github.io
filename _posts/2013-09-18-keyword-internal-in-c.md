@@ -2,6 +2,7 @@
 title: "Keyword 'internal' in C#"
 date: 2013/09/18 12:38:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

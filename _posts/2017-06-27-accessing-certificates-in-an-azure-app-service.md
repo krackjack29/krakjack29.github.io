@@ -2,6 +2,7 @@
 title: "Accessing Certificates in an Azure App Service"
 date: 2017/06/27 13:56:08 +530
 layout: single
+comments: true
 categories: 
     - Azure
 tags:

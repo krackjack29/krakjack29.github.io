@@ -2,6 +2,7 @@
 title: IE 9 Beta is out
 date: 2010/09/17 14:06:55 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

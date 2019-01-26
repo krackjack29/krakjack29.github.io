@@ -2,6 +2,7 @@
 title: Resource Manager And Azure Active Directory using .Net Core
 date: 2016/10/25 23:46:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

@@ -2,6 +2,7 @@
 title: Adding and reading custom sections in web.config
 date: 2011/06/27 15:24:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

@@ -2,6 +2,7 @@
 title: "SQL: How to find duplicate records in a single query"
 date: 2010/10/07 16:26:00 +530
 layout: single
+comments: true
 categories: 
    - sql
 tags:

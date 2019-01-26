@@ -2,6 +2,7 @@
 title: "SQL: How to get the primary key of a record after the insert without using Select"
 date: 2010/09/13 15:23:00 +530
 layout: single
+comments: true
 categories: 
    - SQL
 tags:

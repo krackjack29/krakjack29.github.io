@@ -2,6 +2,7 @@
 title: "Agile: Failure scenarios"
 date: 2010-05-12 12:28:38 +530
 layout: single
+comments: true
 categories: 
    - Agile
 tags:

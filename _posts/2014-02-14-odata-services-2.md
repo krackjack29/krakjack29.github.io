@@ -2,6 +2,7 @@
 title: Introduction to OData
 created: 2014/02/14 17:08:00
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

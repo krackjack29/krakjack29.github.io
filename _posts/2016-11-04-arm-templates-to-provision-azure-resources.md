@@ -2,6 +2,7 @@
 title: ARM Templates to provision Azure Resources
 date: 2016/11/04 13:02:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

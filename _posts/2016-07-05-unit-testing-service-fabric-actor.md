@@ -2,6 +2,7 @@
 title: Unit testing Service Fabric Actor
 date: 2016/07/05 18:06:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

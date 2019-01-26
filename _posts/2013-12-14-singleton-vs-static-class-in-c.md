@@ -2,6 +2,7 @@
 title: "Singleton vs Static Class in C#"
 date: 2013/12/14 00:19:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

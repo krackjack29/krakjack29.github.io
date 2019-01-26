@@ -2,6 +2,7 @@
 title: .Net Internals
 date: 2010/09/22 13:18:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

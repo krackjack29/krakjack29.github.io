@@ -2,6 +2,7 @@
 title: Inversion of Control
 date: 2010-08-30 17:03:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

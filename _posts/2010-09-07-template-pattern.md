@@ -2,6 +2,7 @@
 title: Template Pattern
 date: 2010/09/07 18:05:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

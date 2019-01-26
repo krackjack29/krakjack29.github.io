@@ -2,6 +2,7 @@
 title: "Programming Azure TableStorage : Repository Pattern Part -2"
 date: 2013/08/09 05:21:00 +530
 layout: single
+comments: true
 categories: 
    - Design Patterns
    - Azure

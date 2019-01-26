@@ -2,6 +2,7 @@
 title: Dynamic Web Controls using ASP.Net
 date: 2011/10/08 16:44:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

@@ -2,6 +2,7 @@
 title: Continuous Deployment of Service Fabric Application
 date: 2016/08/11 21:21:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

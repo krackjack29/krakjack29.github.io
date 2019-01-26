@@ -2,6 +2,7 @@
 title: Windows phone 7 Tools Available
 date: 2010/10/12 12:30:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

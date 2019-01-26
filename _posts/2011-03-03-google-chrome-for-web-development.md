@@ -2,6 +2,7 @@
 title: Google Chrome for web development
 date: 2011/03/03 09:20:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

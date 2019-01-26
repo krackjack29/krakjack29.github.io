@@ -1,6 +1,7 @@
 ---
 title: "Arm templates–Best practices and my learnings"
 layout: single
+comments: true
 date: 2018/07/24 
 categories: 
     - Azure

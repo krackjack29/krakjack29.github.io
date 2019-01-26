@@ -2,6 +2,7 @@
 title: State Pattern
 date: 2010/09/14 12:01:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

@@ -2,6 +2,7 @@
 title: Adapter Pattern
 date: 2013/09/30 14:36:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

@@ -2,6 +2,7 @@
 title: Events Vs Delegates
 date: 2013/08/22 23:11:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

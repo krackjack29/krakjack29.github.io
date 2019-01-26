@@ -2,6 +2,7 @@
 title: Debugging Windows service using Visual Studio
 date: 2011/10/10 19:20:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

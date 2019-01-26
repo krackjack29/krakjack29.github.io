@@ -2,6 +2,7 @@
 title: "Chain of Responsibility pattern (CoR)"
 date: 2010-02-21 15:26:22 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

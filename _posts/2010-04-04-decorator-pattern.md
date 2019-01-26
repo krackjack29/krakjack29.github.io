@@ -2,6 +2,7 @@
 title: "Decorator Pattern"
 date: 2010-04-04 15:24:30 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

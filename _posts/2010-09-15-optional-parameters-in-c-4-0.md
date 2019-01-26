@@ -2,6 +2,7 @@
 title: Optional Parameters in C# 4.0
 date: 2010/09/15 12:55:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

@@ -2,6 +2,7 @@
 title: Agile - Reasons for failure
 date: 2013/08/24 16:56:00 +530
 layout: single
+comments: true
 categories: 
    - Agile
 tags:

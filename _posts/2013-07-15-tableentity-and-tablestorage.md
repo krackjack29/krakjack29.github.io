@@ -2,6 +2,7 @@
 title: TableEntity and TableStorage
 date: 2013/07/15 20:10:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

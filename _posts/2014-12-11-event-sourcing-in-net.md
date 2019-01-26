@@ -2,6 +2,7 @@
 title: "Event Sourcing in .Net"
 date: 2014/12/11 17:53:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

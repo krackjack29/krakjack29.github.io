@@ -2,6 +2,7 @@
 title: Creating a Console Application using Visual Studio Code and DotNetCore
 date: 2016/07/06 16:49:00
 layout: single
+comments: true
 categories: 
    - .net
 tags:

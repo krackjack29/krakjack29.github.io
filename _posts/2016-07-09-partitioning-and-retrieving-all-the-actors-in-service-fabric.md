@@ -2,6 +2,7 @@
 title: Partitioning and retrieving all the actors in service fabric
 date: 2016/07/09 11:22:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

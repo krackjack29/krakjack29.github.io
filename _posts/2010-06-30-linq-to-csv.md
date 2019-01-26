@@ -2,6 +2,7 @@
 title: Linq to CSV
 date: 2010-06-30 18:07:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

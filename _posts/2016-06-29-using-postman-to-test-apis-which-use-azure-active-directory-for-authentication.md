@@ -2,6 +2,7 @@
 title: Using postman to test Apis which use Azure Active Directory for Authentication
 date: 2016/06/29 00:30:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

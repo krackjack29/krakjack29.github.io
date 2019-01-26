@@ -2,6 +2,7 @@
 title: "SOLID principles of OOAD : Crash Course"
 date: 2013/08/23 11:45:00 +530
 layout: single
+comments: true
 categories: 
    - Design Pattern
 tags:

@@ -2,6 +2,7 @@
 title: Accessing npm packages on a private server
 date: 2016/07/05 11:50:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

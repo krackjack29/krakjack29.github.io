@@ -2,6 +2,7 @@
 title: Custom ASP.Net MVC4 Forms Authentication using TableStorage
 date: 2013/10/07 18:16:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

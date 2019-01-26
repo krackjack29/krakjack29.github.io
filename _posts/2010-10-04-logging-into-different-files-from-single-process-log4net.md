@@ -2,6 +2,7 @@
 title: Logging into different files from single process - Log4Net
 date: 2010/10/04 10:58:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

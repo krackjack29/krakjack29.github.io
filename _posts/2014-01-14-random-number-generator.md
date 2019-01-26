@@ -2,6 +2,7 @@
 title: Random Number Generator
 date: 2014/01/14 15:29:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

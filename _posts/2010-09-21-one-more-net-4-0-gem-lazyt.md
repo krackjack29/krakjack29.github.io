@@ -2,6 +2,7 @@
 title: "One more .Net 4.0 Gem - Lazy&lt;T&gt;"
 date: 2010/09/21 16:53:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

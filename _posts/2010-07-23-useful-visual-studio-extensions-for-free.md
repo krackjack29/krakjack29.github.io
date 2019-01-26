@@ -2,6 +2,7 @@
 title: Useful Visual Studio Extensions for free
 date: 2010-07-23 18:10:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:

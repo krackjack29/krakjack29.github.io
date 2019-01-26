@@ -2,6 +2,7 @@
 title: Opening ports on a deployed ServiceFabric cluster
 date: 2016/06/28 12:19:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

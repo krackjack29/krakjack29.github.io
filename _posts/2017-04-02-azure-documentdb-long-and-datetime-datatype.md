@@ -2,6 +2,7 @@
 title: "Azure DocumentDb: long and DateTime datatype"
 date: 2017/04/02 12:29:00
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

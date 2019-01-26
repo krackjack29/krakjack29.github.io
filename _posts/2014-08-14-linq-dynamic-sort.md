@@ -2,6 +2,7 @@
 title: "LINQ - Generic Sort"
 date: 2014/08/14 22:19:00 +530
 layout: single
+comments: true
 categories: 
    - .Net
 tags:

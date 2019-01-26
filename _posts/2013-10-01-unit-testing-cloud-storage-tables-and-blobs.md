@@ -2,6 +2,7 @@
 title: "Unit Testing Cloud Storage (Tables and Blobs)"
 date: 2013/10/01 13:41:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

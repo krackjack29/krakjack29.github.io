@@ -2,6 +2,7 @@
 title: Deploying ARM Template and parsing the outputs in a .Net Application
 date: 2016/11/04 15:54:00 +530
 layout: single
+comments: true
 categories: 
    - Azure
 tags:

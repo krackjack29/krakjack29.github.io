@@ -1,6 +1,7 @@
 ---
 title: "Abstract Factory – Design Pattern"
 date: 2010-01-23 15:27:50 +0530
+comments: true
 categories: 
    - Design Pattern
 tags:

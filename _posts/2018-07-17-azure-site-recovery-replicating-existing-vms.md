@@ -2,6 +2,7 @@
 title : "Azure Site Recovery–Replicating existing VMs using ARM Templates"
 date: 2018/07/17 
 layout: single
+comments: true
 categories: 
     - Azure
 tags:

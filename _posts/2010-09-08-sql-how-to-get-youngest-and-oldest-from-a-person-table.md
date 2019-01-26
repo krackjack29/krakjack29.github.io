@@ -2,6 +2,7 @@
 title: "SQL: How to get youngest and oldest from a person table"
 date: 2010/09/08 14:15:00 +530
 layout: single
+comments: true
 categories: 
    - SQL
 tags:

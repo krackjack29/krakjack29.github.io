@@ -2,6 +2,7 @@
 title: "Windows Live 2011: Gateway to Social Networking heaven"
 date: 2010/10/28 18:55:00 +530
 layout: single
+comments: true
 categories: 
    - Tech
 tags:
