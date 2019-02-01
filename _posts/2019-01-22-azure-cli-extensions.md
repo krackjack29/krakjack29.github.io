@@ -10,7 +10,6 @@ tags:
     - cloud
     - tools
     - cli
-excerpt: "Azure CLI alias extensions"
 ---
 
 Azure CLI is a powerful cross-platform command line tool for managing Azure resources, this has become my go-to command line utility for doing so. It’s written using Python and has a simple standardized command pattern of “az {resourceType} {command} {options}”.
