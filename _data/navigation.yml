@@ -2,6 +2,10 @@
 main:
   #- title: "Quick-Start Guide"
   #  url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+  - title: "Tags"
+    url: /tags/
+  - title: "Categories"
+    url: /categories/
   - title: "About Me"
     url: https://about.me/pratapbhaskar
     
