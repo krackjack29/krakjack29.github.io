@@ -11,6 +11,7 @@ tags:
     - vms
     - asr
     - recovery
+excerpt: "Automating azure site recovery or ASR to replicate VMs in a secondary region"
 ---
 
 Azure Site Recovery (ASR) service contributes for the backup and disaster recovery service. It provides features like backup service and disaster recovery service for the IAAS systems. Not only VMs on Azure but VMs in your datacenter running on VMWare and HyperV.

@@ -9,6 +9,7 @@ tags:
     - azure
     - cloud
     - arm templates
+excerpt: "Azure resource manager templates best practices for Infrastructure as code"
 ---
 
 I have been lately working on ***Infrastructure as Code*** project to deploy reference architectures on Microsoft Azure, which provided me with an opportunity to do a deep dive into the world or Azure Resource Manager (ARM) templates. This blog is to summarize the experience and learnings about ARM templates.

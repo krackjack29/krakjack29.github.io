@@ -9,6 +9,7 @@ tags:
     - azure
     - cloud
     - appservice
+excerpt: "Loading SSL certificates from Azure APP service for Client certificate validation"
 ---
 
 There are number of reasons one would want to load a certificate (*.pfx, *.p12) with **private key**, mine was to sign a JWT token. Requirement was to sign JWT with private key and validate it on the client application using public key. This signing application was to be hosted in Azure App Service.
