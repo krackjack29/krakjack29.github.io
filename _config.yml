@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "air" #"default" "air", "aqua", "contrast", "dark", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : &title "Just A Developer's learnings in the journey of Cloud, Azure and Microsoft Technologies"
+title                    : &title "Just A Developer's learnings"
 title_separator          : "-"
 name                     : &name "Pratap Bhaskar"
 description              : "My findings in technical world, to help others solve the problems that I have faced."
