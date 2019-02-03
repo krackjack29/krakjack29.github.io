@@ -2,7 +2,7 @@
 title: 'Azure Table Storage performance'
 layout: single
 comments: true
-date : 2019/02/03
+date : 2019/02/04
 categories:
     - azure
 tags:
