@@ -6,7 +6,7 @@ comments: true
 categories: 
    - Design Pattern
 tags:
-   - Designpatterns
+   - designpatterns
    - csharp
 ---
 When we need to implement a state diagram, the first thing we would look to implement is a switch case or a multiple if else statement. This kind of implementation would become difficult to maintain as the number of states increases.

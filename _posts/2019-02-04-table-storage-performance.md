@@ -4,7 +4,7 @@ layout: single
 comments: true
 date : 2019/02/04
 categories:
-    - azure
+    - Azure
 tags:
     - azure
     - cloud
