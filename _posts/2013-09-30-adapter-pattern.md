@@ -6,7 +6,7 @@ comments: true
 categories: 
    - Design Pattern
 tags:
-   - Designpatterns
+   - designpatterns
    - csharp
 ---
 

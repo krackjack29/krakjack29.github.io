@@ -7,7 +7,7 @@ categories:
    - Design Pattern
 tags:
    - .net
-   - designpattern
+   - designpatterns
 ---
 
 Inversion of control is a pattern where the creating and life time of the objects is passed from the client to another layer.
