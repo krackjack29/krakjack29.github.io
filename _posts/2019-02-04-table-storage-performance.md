@@ -11,7 +11,6 @@ tags:
     - functions
     - appinsights
     - performance
-toc: true
 ---
 
 [Azure table storage](https://docs.microsoft.com/en-in/azure/storage/tables/table-storage-overview) is one of the cheapest No-SQL (Key value store) datastore amongst other services. Table storage can be used for multiple scenarios such as configuration store, diagnostics logs, WAD logs etc.

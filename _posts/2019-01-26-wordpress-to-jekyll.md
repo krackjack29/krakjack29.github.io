@@ -10,7 +10,6 @@ tags:
     - pages
     - jekyll
     - wordpress
-toc: true
 ---
 
 I have been blogging on WordPress platform since 2010 (even though I wish to write more), I had always found it very difficult to share code, considering most of my blogs are technical and need code snippets to explain better. I used [Open Live Writer](http://openlivewriter.org/) to write the blogs offline and publish them to [wordpress](https://www.pratapgowda.wordpress.com). 
