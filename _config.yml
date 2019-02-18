@@ -73,7 +73,7 @@ algolia:
   search_only_api_key    : # YOUR_SEARCH_ONLY_API_KEY
   powered_by             : # true (default), false
 google:
-  search_engine_id       : 013134633905783082070:8jeep-wgv9s
+  search_engine_id       : 013134633905783082070:sjzuc3kn7hs
   instant_search         : true # false (default), true
 # SEO Related
 google_site_verification : 3kddrnE6Ccf4Pd5vkX1E1i6L4PKtmJ8xJp_JVQuWIQU
