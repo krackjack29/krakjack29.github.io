@@ -13,8 +13,8 @@ tags:
 
 I have been lately working on ***Infrastructure as Code*** project to deploy reference architectures on Microsoft Azure, which provided me with an opportunity to do a deep dive into the world or Azure Resource Manager (ARM) templates. This blog is to summarize the experience and learnings about ARM templates.
 
-## Nested Templates
-To improve the reusability of the templates, always use nested templates approach. Break down the resources you need to deploy into granular pieces as individual templates and invoke them using a root template.
+## Linked Templates
+To improve the reusability of the templates, always use linked templates approach. Break down the resources you need to deploy into granular pieces as individual templates and invoke them using a root template.
 
 Point to remember: The nested templates must be visible to the Azure resource manager during deployment. One can deploy all the templates to a private blob storage and generate a SAS key during the deployment.
 
