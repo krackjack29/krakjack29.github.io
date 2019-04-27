@@ -1,5 +1,5 @@
 ---
-title: "Restricting Azure APP service accessible only via an Application Gateway"
+title: "Restricting Azure webapp accessibility via an Application Gateway"
 layout: single
 comments: true
 date: 2019/04/07
