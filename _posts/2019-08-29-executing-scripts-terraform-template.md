@@ -1,5 +1,5 @@
 ---
-title: 'Executing remote scripts in Terraform template'
+title: 'Executing scripts in Terraform template'
 layout: single
 comments: true
 date : 2019/08/28
