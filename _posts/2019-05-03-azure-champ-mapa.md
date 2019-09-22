@@ -1,6 +1,8 @@
 ---
 title: 'The MAPA - Azure Champ'
-layout: single
+header: 
+    image: /assets/images/certificates/mapa.png
+    caption: 'The MAPA Azure Champ'
 comments: true
 date : 2019/05/03
 categories:
@@ -13,8 +15,6 @@ tags:
 ---
 
 I have been given **Azure Champ** status by The-MAPA.
-
-![Azure Champ](/assets/images/certificates/mapa.png)
 
 ## What is THE-MAPA
 [**MAPA**](www.the-mapa.com), an acronym for *Microsoft Association of Practising Architects*, is a global community of IT Architects. It allows the Architects across the globe to share, interact and engage with each other. 
