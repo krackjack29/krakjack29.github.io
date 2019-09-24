@@ -25,7 +25,7 @@ Terraform has a provider called "null_resource" which would be treated the same 
 
 These are used to run the scripts on the created resources, example would be 
 
-```hcl
+```text
 resource "null_resource" "deploy-pods" {
   triggers = {
     host = "${google_container_cluster.cluster.endpoint}"
@@ -49,7 +49,7 @@ Let's say in the second run only the template file is modified, terraform wouldn
 One way to trigger the scripts is by updating the trigger manual by adding a simple version number and incrementing it each time you would want to rerun the script.
 
 
-```hcl
+```
 resource "null_resource" "deploy-pods" {
   triggers = {
     host = "${google_container_cluster.cluster.endpoint}"
