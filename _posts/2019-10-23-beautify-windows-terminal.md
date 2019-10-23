@@ -37,7 +37,7 @@ sudo chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 Now the bash terminal would look something like this 
-![zsh](../assets/images/zsh/zsh.png)
+![zsh](/assets/images/zsh/zsh.png)
 
 The configuration file would be stored in zshrc stored in the root directory, you could add themes and plugins as needed. I have uploaded my zshrc to this [gist](https://gist.github.com/772bdfe2c454dc7a816d878c477a23de), if you are looking for an example.
 
@@ -65,7 +65,7 @@ Set-Theme Paradox
 ```
 Close and re-open the tab and you should be noticing your powershell modified.
 
-![Pwsh-no](../assets/images/zsh/pwsh-nofont.png)
+![Pwsh-no](/assets/images/zsh/pwsh-nofont.png)
 
 You could change the themes as you deemed fit by modifying your profile.
 
@@ -73,9 +73,9 @@ You could change the themes as you deemed fit by modifying your profile.
 
 If you noticed the above image, the square boxes are because of the missing glyphs in the font used for the terminal. Cascadia code doesn't have all the glyphs and the nerd fonts patched, you can patch it yourself using the [Nerd fonts](https://www.nerdfonts.com/). 
 
-I have already patched Cascadia code and you can download it [here](../assets/static/CascadiaCode-Nerd-Font-Complete.ttf)
+I have already patched Cascadia code and you can download it [here](/assets/static/CascadiaCode-Nerd-Font-Complete.ttf)
 
 Once you have downloaded the font and installed it, update the terminal font to *CascadiaCode Nerd Font*, your prompt should start looking like this now
-![Pwsh](../assets/images/zsh/pwsh.png)
+![Pwsh](/assets/images/zsh/pwsh.png)
 
 Happy Coding!!!!
