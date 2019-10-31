@@ -6,7 +6,7 @@ sidebar:
     - image: assets/images/me.jpg
 ---
 
-Hello!! Quick introduction I am a software developer, devops hacker, technology enthusiast, nocturnal geek, a proud husband and father of a naughty little kid.
+Hello!! Quick introduction, I am a software developer, devops hacker, technology enthusiast, nocturnal geek, a proud husband and father of a naughty little kid.
 
 I possess over 14 years of programming experience in CRM, Financial and Healthcare industries. I am a proud Microsoft full stack developer, with keen interest on Azure and other cloud computing technologies.
 
