@@ -112,9 +112,6 @@ author:
   location         : "Bangalore, India"
   email            : &email "pratap.aditi@outlook.com"
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/pratapbhaskar29"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/pratap-dotnet"
@@ -122,9 +119,6 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/pratapbhaskar29"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/pratap-dotnet"
