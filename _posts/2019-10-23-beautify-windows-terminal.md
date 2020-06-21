@@ -41,6 +41,11 @@ Now the bash terminal would look something like this
 
 The configuration file would be stored in zshrc stored in the root directory, you could add themes and plugins as needed. I have uploaded my zshrc to this [gist](https://gist.github.com/772bdfe2c454dc7a816d878c477a23de), if you are looking for an example.
 
+
+## [UPDATE] Plugin for ZSH
+
+Recently discovered another gem for windows terminal, [powerlevel10k](https://github.com/romkatv/powerlevel10k) and [autocomplete](https://github.com/zsh-users/zsh-autosuggestions) plugin for ZSH
+
 ## Powershell or Powershell Core
 
 *Oh-My-Posh* is windows version of *Oh-My-zsh*, it contains minimal but sufficient plugins and themes that would delight your experience with the terminal.
