@@ -11,7 +11,7 @@ tags:
     - tools
 ---
 
-Docker desktop is no available with WSL integration, provided that you are on windows 10 1909 build, it brings in a lot of performance improvements to the entire WSL ecospace. Now, one of the problems with docker desktop is that it would install in the C drive and when you pull the containers they would also be stored in the same drive. I have limited space on C drive to begin with, so after a bit of research found a tool to move the contents of docker to another drive.
+Docker desktop is now available with WSL integration, provided that you are on windows 10 1909 build, it brings in a lot of performance improvements to the entire WSL ecospace. Now, one of the problems with docker desktop is that it would install in the C drive and when you pull the containers they would also be stored in the same drive. I have limited space on C drive to begin with, so after a bit of research found a tool to move the contents of docker to another drive.
 
 Once you have installed docker desktop from official installer, you can run the following query
 ```bash
